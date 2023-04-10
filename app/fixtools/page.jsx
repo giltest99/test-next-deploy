@@ -6,6 +6,17 @@ export default function FixTools() {
   const sourceRef = useRef();
   const outputRef = useRef();
 
+  const getSourceFromColumn = () => {
+
+  }
+  const getSourceFromArray = () => {
+    const source = sourceRef.current.value;
+    const sourceSplit = source.split("\n");
+    const tab1 = [];
+    sourceSplit.map((el) => tab1.push(el.split("\t")));
+    return sourceSplit
+  }
+
   const concatValues = () => {
     const sourceValue = sourceRef.current.value;
     if (!sourceValue) {
@@ -21,8 +32,20 @@ export default function FixTools() {
       if (element.trim() !== "") outputArray.push(element.trim());
       else return;
     });
-    console.log(outputArray);
+    //console.log(outputArray);
     outputRef.current.value = outputArray;
+  };
+
+  const somme = () => {
+    const tab1 = getSourceFromArray()
+    const tab2 = tab1.flat(2);
+    const tab3 = tab2.map((el) => Number(el));
+    const tab4 = tab3
+      .filter((el) => !Number.isNaN(el))
+      .filter((el) => el !== 0);
+    const somme = tab4.reduce((sum, el) => sum + el, 0);
+    const moyenne = Number((somme / tab4.length).toFixed(2)) || 0;
+    outputRef.current.value = `Somme = ${somme}\nMoyenne = ${moyenne}`;
   };
 
   const resetSource = () => {
@@ -33,7 +56,7 @@ export default function FixTools() {
   const resetOutput = () => {
     outputRef.current.value = "";
     sourceRef.current.focus();
-  }
+  };
 
   return (
     <main className="flex min-h-screen flex-col items-center px-24 py-6">
@@ -48,13 +71,20 @@ export default function FixTools() {
             autoFocus
           ></textarea>
         </div>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           <button
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded duration-300"
             onClick={concatValues}
             text="Concatenate values"
           >
             Concatenate
+          </button>
+          <button
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded duration-300"
+            onClick={somme}
+            text="Concatenate values"
+          >
+            Somme
           </button>
           <button
             className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded duration-300"
