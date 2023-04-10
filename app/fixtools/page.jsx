@@ -6,17 +6,6 @@ export default function FixTools() {
   const sourceRef = useRef();
   const outputRef = useRef();
 
-  const getSourceFromColumn = () => {
-
-  }
-  const getSourceFromArray = () => {
-    const source = sourceRef.current.value;
-    const sourceSplit = source.split("\n");
-    const tab1 = [];
-    sourceSplit.map((el) => tab1.push(el.split("\t")));
-    return sourceSplit
-  }
-
   const concatValues = () => {
     const sourceValue = sourceRef.current.value;
     if (!sourceValue) {
@@ -37,15 +26,26 @@ export default function FixTools() {
   };
 
   const somme = () => {
-    const tab1 = getSourceFromArray()
+    const source = sourceRef.current.value;
+    if (!source) {
+      sourceRef.current.focus();
+      return;
+    }
+    const sourceSplit = source.split("\n");
+    const tab1 = [];
+    sourceSplit.map((el) => tab1.push(el.split("\t")));
     const tab2 = tab1.flat(2);
     const tab3 = tab2.map((el) => Number(el));
     const tab4 = tab3
       .filter((el) => !Number.isNaN(el))
       .filter((el) => el !== 0);
+    //console.log(tab4);
     const somme = tab4.reduce((sum, el) => sum + el, 0);
     const moyenne = Number((somme / tab4.length).toFixed(2)) || 0;
+    //console.log(somme);
+    //console.log(moyenne);
     outputRef.current.value = `Somme = ${somme}\nMoyenne = ${moyenne}`;
+    sourceRef.current.focus();
   };
 
   const resetSource = () => {
@@ -54,6 +54,12 @@ export default function FixTools() {
   };
 
   const resetOutput = () => {
+    outputRef.current.value = "";
+    sourceRef.current.focus();
+  };
+
+  const resetAll = () => {
+    sourceRef.current.value = "";
     outputRef.current.value = "";
     sourceRef.current.focus();
   };
@@ -88,6 +94,12 @@ export default function FixTools() {
           </button>
           <button
             className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded duration-300"
+            onClick={resetAll}
+          >
+            Reset all
+          </button>
+          {/* <button
+            className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded duration-300"
             onClick={resetSource}
           >
             Reset source
@@ -96,8 +108,8 @@ export default function FixTools() {
             className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded duration-300"
             onClick={resetOutput}
           >
-            Reset source
-          </button>
+            Reset output
+          </button> */}
         </div>
         <div className="flex flex-col gap-2 my-4 container">
           <label htmlFor="output">Output</label>
