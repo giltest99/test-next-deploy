@@ -12,8 +12,6 @@ export default function FixTools() {
       sourceRef.current.focus();
       return;
     }
-    //alert(sourceValue);
-
     const source = sourceRef.current.value;
     const sourceSplit = source.split("\n");
     const outputArray = [];
@@ -21,7 +19,6 @@ export default function FixTools() {
       if (element.trim() !== "") outputArray.push(element.trim());
       else return;
     });
-    //console.log(outputArray);
     outputRef.current.value = outputArray;
   };
 
@@ -39,22 +36,9 @@ export default function FixTools() {
     const tab4 = tab3
       .filter((el) => !Number.isNaN(el))
       .filter((el) => el !== 0);
-    //console.log(tab4);
     const somme = tab4.reduce((sum, el) => sum + el, 0);
     const moyenne = Number((somme / tab4.length).toFixed(2)) || 0;
-    //console.log(somme);
-    //console.log(moyenne);
     outputRef.current.value = `Somme = ${somme}\nMoyenne = ${moyenne}`;
-    sourceRef.current.focus();
-  };
-
-  const resetSource = () => {
-    sourceRef.current.value = "";
-    sourceRef.current.focus();
-  };
-
-  const resetOutput = () => {
-    outputRef.current.value = "";
     sourceRef.current.focus();
   };
 
@@ -69,7 +53,9 @@ export default function FixTools() {
       <h1 className="text-4xl font-bold">Fix Tools</h1>
       <section className="flex flex-col gap-4 my-4 container">
         <div className="flex flex-col gap-2 my-4">
-          <label htmlFor="source" className="text-xl font-bold">Source</label>
+          <label htmlFor="source" className="text-xl font-bold">
+            Source
+          </label>
           <textarea
             ref={sourceRef}
             id="source"
@@ -94,7 +80,9 @@ export default function FixTools() {
           </button>
         </div>
         <div className="flex flex-col gap-2 my-4 container">
-          <label htmlFor="output" className="text-xl font-bold">Output</label>
+          <label htmlFor="output" className="text-xl font-bold">
+            Output
+          </label>
           <textarea
             ref={outputRef}
             id="output"
