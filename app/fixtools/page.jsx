@@ -30,6 +30,11 @@ export default function FixTools() {
     sourceRef.current.focus();
   };
 
+  const resetOutput = () => {
+    outputRef.current.value = "";
+    sourceRef.current.focus();
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center px-24 py-6">
       <h1 className="text-4xl font-bold">Fix Tools</h1>
@@ -54,6 +59,12 @@ export default function FixTools() {
           <button
             className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded duration-300"
             onClick={resetSource}
+          >
+            Reset source
+          </button>
+          <button
+            className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded duration-300"
+            onClick={resetOutput}
           >
             Reset source
           </button>
