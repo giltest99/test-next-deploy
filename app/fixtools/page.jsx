@@ -69,7 +69,7 @@ export default function FixTools() {
       <h1 className="text-4xl font-bold">Fix Tools</h1>
       <section className="flex flex-col gap-4 my-4 container">
         <div className="flex flex-col gap-2 my-4">
-          <label htmlFor="source">Source</label>
+          <label htmlFor="source" className="text-xl font-bold">Source</label>
           <textarea
             ref={sourceRef}
             id="source"
@@ -79,45 +79,35 @@ export default function FixTools() {
         </div>
         <div className="flex flex-wrap gap-4">
           <button
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded duration-300"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-1 rounded duration-300"
             onClick={concatValues}
             text="Concatenate values"
           >
             Concatenate
           </button>
           <button
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded duration-300"
+            className="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-1 rounded duration-300"
             onClick={somme}
             text="Concatenate values"
           >
             Somme
           </button>
-          <button
-            className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded duration-300"
-            onClick={resetAll}
-          >
-            Reset all
-          </button>
-          {/* <button
-            className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded duration-300"
-            onClick={resetSource}
-          >
-            Reset source
-          </button>
-          <button
-            className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded duration-300"
-            onClick={resetOutput}
-          >
-            Reset output
-          </button> */}
         </div>
         <div className="flex flex-col gap-2 my-4 container">
-          <label htmlFor="output">Output</label>
+          <label htmlFor="output" className="text-xl font-bold">Output</label>
           <textarea
             ref={outputRef}
             id="output"
             className="min-h-[200px] p-4 resize-none rounded"
           ></textarea>
+        </div>
+        <div className="flex flex-wrap flex-row-reverse gap-4">
+          <button
+            className="bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-1 rounded duration-300"
+            onClick={resetAll}
+          >
+            Reset all
+          </button>
         </div>
       </section>
     </main>
