@@ -17,6 +17,12 @@ export default function Navigation() {
         >
           Doc
         </Link>
+        <Link
+          href="/fixtools"
+          className="hover:bg-blue-200 px-6 py-1 rounded duration-300 font-semibold"
+        >
+          Fixtools
+        </Link>
       </ul>
     </nav>
   );
